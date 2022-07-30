@@ -4,9 +4,11 @@
 # 작품 설명 영상
 https://youtu.be/6KjvvEqXCNw]
 
-1.데이터 배분
+1.데이터 배분 및 라벨링작업
 
 ![KakaoTalk_20220727_212523070_03](https://user-images.githubusercontent.com/76850241/181916385-f8fc2e54-75d0-4498-abe0-e7311852d83c.jpg)
+![KakaoTalk_20220730_223317077](https://user-images.githubusercontent.com/76850241/181916846-9028fb9d-cd6d-4341-87d4-c9d88df34ab4.jpg)
+
 2.Mask영상획득
 
 ## Mask 영상 획득
