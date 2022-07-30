@@ -1,8 +1,7 @@
 # graduate_project
 # 작품명 : 딥러닝을 사용한 한우 중량 측정
 
-# 작품 설명 영상
-https://youtu.be/6KjvvEqXCNw]
+# 작품 설명 영상 : https://youtu.be/6KjvvEqXCNw]
 
 1.데이터 배분 및 라벨링작업
 
