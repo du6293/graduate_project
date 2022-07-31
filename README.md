@@ -5,15 +5,20 @@
 
 1.데이터 배분 및 라벨링작업
 
+실험에 이용된 한우는 모두 강원도 평창에 있는 농촌진흥청 국립 축산과학원 한우연구소를 통해서 Top View이미지로전달 받았고, 총 개체 수는 46마리의 영상을 받아 영상의 프레임별로 100장씩 나누어 소의 이미지를 얻어냈다.
+Instance Segmentataion 방법으로 한우의 영역 검출을 하기 위해, 소의 TOP VIEW를 VIA(vgg image annotator)를 사용하여 학습 데이터셋에 Annotation 작업을 하였다. 
+
 ![1](https://user-images.githubusercontent.com/76850241/182006994-52846ac2-5bbc-4d40-9679-8209bc9502ed.PNG)
 
 ![1](https://user-images.githubusercontent.com/76850241/182006960-071fdb49-bf84-4cf1-b9a3-0bdd5bceef87.PNG)
 
 ![KakaoTalk_20220730_223317077](https://user-images.githubusercontent.com/76850241/181916846-9028fb9d-cd6d-4341-87d4-c9d88df34ab4.jpg)
 
-2.Mask영상획득
+2.Mask R-CNN을 통한 객체 검출
+Annotation 작업이 끝난 데이터셋들을 분류하기 위해서 Mask R-cnn의 기능 중 instance segmentation task중에서 instance segmentation을 사용하여 객체단위로 분류를 진행해 주었고, instance를 픽셀 단위로 분류하는 task를 해주었다.
+![q](https://user-images.githubusercontent.com/76850241/182008917-abcf11e2-2442-490c-920e-d677fb708310.PNG)
 
-## Mask 영상 획득
+ Mask 영상 획득
 from google.colab import drive
 drive.mount('/gdrive')
 
@@ -21,12 +26,22 @@ drive.mount('/gdrive')
 !pip install tensorboard==1.15.0 tensorflow==1.15.0 tensorflow-estimator==1.15.1 tensorflow-gpu==1.15.2 tensorflow-gpu-estimator==2.1.0 Keras==2.2.5 
 !python3 '/gdrive/My Drive/Colab Notebooks/Mask_RCNN/samples/balloon/balloon.py' train --dataset='/gdrive/My Drive/Colab Notebooks/Mask_RCNN/samples/balloon/cow_
 
-3.opencv로 한우의 top view를 타원형으로 검출
+3. opencv로 한우의 top view를 타원형으로 검출
 ![KakaoTalk_20220727_212523070_05](https://user-images.githubusercontent.com/76850241/181916423-fc227880-6a05-4c8c-882b-b46be81174e2.jpg)
 ![KakaoTalk_20220727_212523070_08](https://user-images.githubusercontent.com/76850241/181916428-7b0cbc97-3c40-49aa-83bd-a385e5198dbe.jpg)
 
+4. 입력값을 다르게하여 성능 개선
+![qq](https://user-images.githubusercontent.com/76850241/182008901-9c5145a5-eb36-4a31-8ccb-1dcd067bdefc.PNG)
 
-4.train data와 test data비교
+Mask R-CNN을 이용하여 Mask를 얻은 뒤, OpenCV를 활용하여 입력값으로 사용할 정보들을 추출해내었다. 입력값으로는 
+1. ‘Mask의 pixel 개수’ 
+2. ‘Mask의 pixel 개수 & 타원 넓이’  
+3. ‘Mask의 pixel 개수 & 장축 및 단축’을 사용하였다. 
+
+예측에 사용한 네트워크 구성에 대해서 살펴보자면, 평가 지표는 MAE(Mean Absolute Error)를 사용하였다. Learning Rate는 1e-6, Epochs는 EarlyStop을 사용하여 MAE를 monitor하여 30Epoch동안 개선이 없으면 학습을 중단시켰다. Optimizer는 RMSprop를 사용하였으며, Input layer와 두 개의 Dense layer, Output layer로 구성되어 있다. 
+
+Mask의 pixel개수만 사용한 경우, MAE값이 27로 pixel개수만으로는 유의미한 예측 결과를 얻기 힘들었다. 따라서 Mask타원의 넓이를 입력 값에 추가해 본 결과 MAE가 20이 나왔다. 이 또한 예측 모델로 사용하기에는 어려운 결과 값이었기 때문에 Mask의 장축과 단축을 입력 값에 추가해주었다. 총 4개의 변수를 Input layer에 넣어 MAE값 16을 얻을 수 있었다. fig. 3는 Loss Function MSE와 평가 지표 MAE가 Epoch이 진행됨에 따라 값이 변하는 모습을 보여준다. 
+5.train data와 test data비교
 ![2](https://user-images.githubusercontent.com/76850241/182006969-dc795f85-d9d8-4583-b551-5db356ddb90b.PNG)
 ![KakaoTalk_20220727_212523070_02](https://user-images.githubusercontent.com/76850241/181916432-ec6c304d-6d13-481f-9bf2-b65d04c60d7b.jpg)
 ![KakaoTalk_20220727_212523070_04](https://user-images.githubusercontent.com/76850241/181916434-9e4bd606-573d-4355-9316-1d9ced9442d8.jpg)
