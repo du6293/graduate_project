@@ -6,6 +6,8 @@
 1.데이터 배분 및 라벨링작업
 
 ![KakaoTalk_20220727_212523070_03](https://user-images.githubusercontent.com/76850241/181916385-f8fc2e54-75d0-4498-abe0-e7311852d83c.jpg)
+![1](https://user-images.githubusercontent.com/76850241/182006960-071fdb49-bf84-4cf1-b9a3-0bdd5bceef87.PNG)
+
 ![KakaoTalk_20220730_223317077](https://user-images.githubusercontent.com/76850241/181916846-9028fb9d-cd6d-4341-87d4-c9d88df34ab4.jpg)
 
 2.Mask영상획득
@@ -24,5 +26,6 @@ drive.mount('/gdrive')
 
 
 4.train data와 test data비교
+![2](https://user-images.githubusercontent.com/76850241/182006969-dc795f85-d9d8-4583-b551-5db356ddb90b.PNG)
 ![KakaoTalk_20220727_212523070_02](https://user-images.githubusercontent.com/76850241/181916432-ec6c304d-6d13-481f-9bf2-b65d04c60d7b.jpg)
 ![KakaoTalk_20220727_212523070_04](https://user-images.githubusercontent.com/76850241/181916434-9e4bd606-573d-4355-9316-1d9ced9442d8.jpg)
