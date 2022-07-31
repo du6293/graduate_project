@@ -5,7 +5,8 @@
 
 1.데이터 배분 및 라벨링작업
 
-![KakaoTalk_20220727_212523070_03](https://user-images.githubusercontent.com/76850241/181916385-f8fc2e54-75d0-4498-abe0-e7311852d83c.jpg)
+![1](https://user-images.githubusercontent.com/76850241/182006994-52846ac2-5bbc-4d40-9679-8209bc9502ed.PNG)
+
 ![1](https://user-images.githubusercontent.com/76850241/182006960-071fdb49-bf84-4cf1-b9a3-0bdd5bceef87.PNG)
 
 ![KakaoTalk_20220730_223317077](https://user-images.githubusercontent.com/76850241/181916846-9028fb9d-cd6d-4341-87d4-c9d88df34ab4.jpg)
